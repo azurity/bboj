@@ -13,5 +13,6 @@ router.get('/', (req, res) => {
 
 router.use('/main', require('./routes/index'))
 router.use('/list', require('./routes/problemlist'))
+router.use('/profile', require('./routes/profile'))
 
 module.exports = router

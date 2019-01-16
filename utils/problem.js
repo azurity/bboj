@@ -43,10 +43,16 @@ const loadProblem = () => {
     for (let f of fs.readdirSync(global.config.problem.path)) {
         let localPath = path.resolve(global.config.problem.path, f)
         if (fs.statSync(localPath).isDirectory()) {
-            let problem = global.config.problem.parser(localPath)
-            let hashProblem = JSON.parse(JSON.stringify(problem))
-            hashProblem.path = []
-            let hash = crypto.createHash('sha256').update(JSON.stringify(hashProblem)).digest('hex').slice(0, 16)
+            let problem
+            try {
+                problem = global.config.problem.parser(localPath)
+            } catch (err) {
+                continue
+            }
+            if (!problem) {
+                continue
+            }
+            let hash = crypto.createHash('sha256').update(JSON.stringify(problem.name)).digest('hex').slice(0, 16)
             if (!!localProblems[hash]) {
                 throw '重复的题目'
             }
@@ -67,6 +73,10 @@ const loadProblem = () => {
     }
     problems = localProblems
     renewProblemTree()
+}
+
+const getProblem = () => {
+    return problems
 }
 
 const getProblemTree = () => {
@@ -124,5 +134,6 @@ function renewProblemTree() {
 module.exports = {
     router,
     loadProblem,
+    getProblem,
     getProblemTree
 }
