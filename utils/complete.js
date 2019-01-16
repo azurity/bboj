@@ -1,6 +1,6 @@
 const { setUserTime, setUserScore } = require('./competition')
 const db = require('../db')
-const { getProblem, renewScore } = require('./problem')
+const { getProblem, renewCount, renewScore } = require('./problem')
 
 const CompleteSchema = new db.Schema({
     user: String,
@@ -17,7 +17,8 @@ const addComplete = (user, problem) => {
             return
         }
         problemComplete(problem, (list) => {
-            renewScore(list)
+            renewCount(problem, list.length)
+            renewScore(problem, list)
             for (let it of list) {
                 renewUserScore(it.user)
             }
@@ -54,6 +55,12 @@ const problemComplete = (problem, callback) => {
     })
 }
 
+const renewCompleteCount = (problem) => {
+    problemComplete(problem, (list) => {
+        renewCount(problem, list.length)
+    })
+}
+
 function renewUserScore(user) {
     let score = 0
     let problem = getProblem()
@@ -67,5 +74,6 @@ function renewUserScore(user) {
 module.exports = {
     addComplete,
     userComplete,
-    problemComplete
+    problemComplete,
+    renewCompleteCount
 }

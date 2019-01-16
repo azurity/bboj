@@ -56,6 +56,7 @@ const loadProblem = () => {
             if (!!localProblems[hash]) {
                 throw '重复的题目'
             }
+            problem.count = 0
             localProblems[hash] = problem
         }
     }
@@ -83,16 +84,20 @@ const getProblemTree = () => {
     return problemTree
 }
 
-const renewScore = (list) => {
+const renewCount = (problem, count) => {
+    problem.count = count
+}
+
+const renewScore = (problem, list) => {
     try {
         let template = plugins[problem.template]
         for (let it of problem.plugin) {
             if (!!it.renewScore) {
-                it.renewScore(problem)
+                it.renewScore(problem, list)
             }
         }
         if (!!template.renewScore) {
-            template.renewScore(problem)
+            template.renewScore(problem, list)
         }
     } catch (err) {
         console.log('分数刷新故障:', problem.name)

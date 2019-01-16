@@ -23,7 +23,7 @@ router.get('/', (req, res) => {
 
 router.get('/finish/:id', (req, res) => {
     problemComplete(req.params.id, (val) => {
-        res.json(val)
+        res.json(val => val.user)
     })
 })
 
