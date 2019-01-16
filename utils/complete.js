@@ -59,6 +59,7 @@ function renewUserScore(user) {
     let problem = getProblem()
     for (let it of userComplete(user)) {
         score += problem[it.problem]
+        /* TODO: 动态积分 */
     }
     setUserScore(user, problem)
 }
