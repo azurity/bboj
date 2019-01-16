@@ -26,7 +26,7 @@ const userComplete = (user, callback) => {
     })
 }
 
-const problemComplete = (problem) => {
+const problemComplete = (problem, callback) => {
     let query = Complete.find({})
     query.where('problem', problem)
     query.lean()
