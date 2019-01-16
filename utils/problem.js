@@ -83,6 +83,23 @@ const getProblemTree = () => {
     return problemTree
 }
 
+const renewScore = (list) => {
+    try {
+        let template = plugins[problem.template]
+        for (let it of problem.plugin) {
+            if (!!it.renewScore) {
+                it.renewScore(problem)
+            }
+        }
+        if (!!template.renewScore) {
+            template.renewScore(problem)
+        }
+    } catch (err) {
+        console.log('分数刷新故障:', problem.name)
+        process.exit(1)
+    }
+}
+
 function createProblem(problem) {
     try {
         let template = plugins[problem.template]
@@ -135,5 +152,6 @@ module.exports = {
     router,
     loadProblem,
     getProblem,
-    getProblemTree
+    getProblemTree,
+    renewScore
 }

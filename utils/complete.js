@@ -1,4 +1,6 @@
+const { setUserTime, setUserScore } = require('./competition')
 const db = require('../db')
+const { getProblem, renewScore } = require('./problem')
 
 const CompleteSchema = new db.Schema({
     user: String,
@@ -8,8 +10,19 @@ const CompleteSchema = new db.Schema({
 const Complete = db.model('Complete', CompleteSchema)
 
 const addComplete = (user, problem) => {
-    Complete.insertMany([{ user, problem }], (err) => {
-        console.error(user, problem, err)
+    let time = Date.now()
+    Complete.insertMany([{ user, problem, time }], (err) => {
+        if (err) {
+            console.error(user, problem, err)
+            return
+        }
+        problemComplete(problem, (list) => {
+            renewScore(list)
+            for (let it of list) {
+                renewUserScore(it.user)
+            }
+            setUserTime(user, time)
+        })
     })
 }
 
@@ -20,7 +33,8 @@ const userComplete = (user, callback) => {
     query.exec((err, val) => {
         if (err) {
             console.error(err)
-            return callback([])
+            callback([])
+            return
         }
         callback(val)
     })
@@ -33,10 +47,20 @@ const problemComplete = (problem, callback) => {
     query.exec((err, val) => {
         if (err) {
             console.error(err)
-            return callback([])
+            callback([])
+            return
         }
         callback(val)
     })
+}
+
+function renewUserScore(user) {
+    let score = 0
+    let problem = getProblem()
+    for (let it of userComplete(user)) {
+        score += problem[it.problem]
+    }
+    setUserScore(user, problem)
 }
 
 module.exports = {
