@@ -1,0 +1,14 @@
+{
+    "problem": {
+        "path": "problems",
+        "parser": "utils/problemParser"
+    },
+    "view": {
+        "path": "views",
+        "engine": "ejs"
+    },
+    "session": {
+        "maxAge": 3600000
+    },
+    "pluginPath": "plugins"
+}

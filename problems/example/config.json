@@ -1,0 +1,10 @@
+{
+    "name": "exmaple",
+    "path": [
+        "misc",
+        "python"
+    ],
+    "template": "basicFlag",
+    "plugin": [],
+    "flag":"bboj for happy"
+}
