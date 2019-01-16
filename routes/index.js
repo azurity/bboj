@@ -123,4 +123,16 @@ router.post('/register', bodyParser.json(), (req, res) => {
     })
 })
 
+router.get('/allTeam', (req, res) => {
+    let query = User.find({})
+    query.lean()
+    query.exec((err, val) => {
+        if (err) {
+            res.render('error', { error: 500 })
+            return
+        }
+        res.render('allTeam', val.map(value => value.username))
+    })
+})
+
 module.exports = router
