@@ -12,10 +12,12 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
-    "mongoose": "^5.4.4",
-    "randomstring": "^1.1.5"
+    "mongoose": "^5.4.4"
   },
   "config": {
-    "port": 3000
+    "port": 3000,
+    "problemPath": "problems",
+    "problemParser": "utils/problemParser",
+    "pluginPath": "plugins"
   }
 }
