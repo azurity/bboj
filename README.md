@@ -10,4 +10,4 @@
 
 ## license
 
-采用MIT协议，详见[]
+采用MIT协议，详见[LICENSE](LICENSE)
