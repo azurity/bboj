@@ -14,5 +14,8 @@
     "express": "^4.16.4",
     "mongoose": "^5.4.4",
     "randomstring": "^1.1.5"
+  },
+  "config": {
+    "port": 3000
   }
 }

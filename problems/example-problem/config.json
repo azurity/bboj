@@ -1,0 +1,8 @@
+{
+    "name": "example problem",
+    "plugins": [
+        "basicFlag"
+    ],
+    "score": 1000,
+    "description": "这就是题目的描述文字"
+}
