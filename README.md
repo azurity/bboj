@@ -1,9 +1,13 @@
 # BBOJ
 
-是Breadboard-OJ的缩写。
+## 简介
 
-一个模块化的OJ平台，随便写写，顺便在假期课程的时候用一下。
+- 是Breadboard-OJ的缩写，也可以认为是BB-OJ(给nodebb用的oj)
+- 一个模块化的OJ平台。
+- 主要是为了网安协会的培训开发。
+<!--也许也能作为Tp0t的平台用？-->
+- 需要和nodebb配套使用，nodebb作为前端(需要[nodebb-plugin-bboj](http://github.com/azurity/nodebb-plugin-bboj)插件)
 
 ## license
 
-还没想好，暂时ISC
+采用MIT协议，详见[]
